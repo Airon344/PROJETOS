@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Virtual</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .calculadora {
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #visor {
+            width: 100%;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 10px;
+            padding: 5px;
+            background-color: #eee;
+            border: none;
+            border-radius: 5px;
+        }
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .operador {
+            background-color: #f44336;
+        }
+        .operador:hover {
+            background-color: #da190b;
+        }
+        #igual {
+            background-color: #2196F3;
+        }
+        #igual:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculadora">
+        <input type="text" id="visor" readonly>
+        <div class="botoes">
+            <button onclick="limpar()">C</button>
+            <button onclick="apagar()">←</button>
+            <button onclick="adicionarAoVisor('(')">(</button>
+            <button onclick="adicionarAoVisor(')')">)</button>
+            <button onclick="adicionarAoVisor('7')">7</button>
+            <button onclick="adicionarAoVisor('8')">8</button>
+            <button onclick="adicionarAoVisor('9')">9</button>
+            <button class="operador" onclick="adicionarAoVisor('/')">/</button>
+            <button onclick="adicionarAoVisor('4')">4</button>
+            <button onclick="adicionarAoVisor('5')">5</button>
+            <button onclick="adicionarAoVisor('6')">6</button>
+            <button class="operador" onclick="adicionarAoVisor('*')">*</button>
+            <button onclick="adicionarAoVisor('1')">1</button>
+            <button onclick="adicionarAoVisor('2')">2</button>
+            <button onclick="adicionarAoVisor('3')">3</button>
+            <button class="operador" onclick="adicionarAoVisor('-')">-</button>
+            <button onclick="adicionarAoVisor('0')">0</button>
+            <button onclick="adicionarAoVisor('.')">.</button>
+            <button id="igual" onclick="calcular()">=</button>
+            <button class="operador" onclick="adicionarAoVisor('+')">+</button>
+        </div>
+    </div>
+
+    <script>
+        function adicionarAoVisor(valor) {
+            document.getElementById('visor').value += valor;
+        }
+
+        function limpar() {
+            document.getElementById('visor').value = '';
+        }
+
+        function apagar() {
+            var visor = document.getElementById('visor');
+            visor.value = visor.value.slice(0, -1);
+        }
+
+        function calcular() {
+            var visor = document.getElementById('visor');
+            try {
+                visor.value = eval(visor.value);
+            } catch (error) {
+                visor.value = 'Erro';
+            }
+        }
+    </script>
+</body>
+</html>
